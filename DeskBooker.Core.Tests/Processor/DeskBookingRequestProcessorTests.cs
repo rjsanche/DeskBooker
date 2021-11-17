@@ -29,5 +29,6 @@ namespace DeskBooker.Core.Processor
             Assert.Equal(request.Email, result.Email);
             Assert.Equal(request.Date, result.Date);
         }
+
     }
 }
