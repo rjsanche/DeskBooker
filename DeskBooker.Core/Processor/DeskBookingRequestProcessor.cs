@@ -34,6 +34,7 @@ namespace DeskBooker.Core.Processor
                 _deskBookingRepository.Save(newDeskBooking);
 
                 result.Code = DeskBookingResultCode.Success;
+                result.DeskBookingId = newDeskBooking.Id;
             }
             else
             {
