@@ -1,6 +1,7 @@
 ﻿using DeskBooker.Core.Domain;
 using DeskBooker.Core.Interface;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DeskBooker.Core.Processor
@@ -22,9 +23,13 @@ namespace DeskBooker.Core.Processor
             {
                 throw new ArgumentNullException(nameof(request));
             }
-            if (_deskRepository.GetAvailableDesks(request.Date).Any())
+            IEnumerable<Desk> availableDesks = _deskRepository.GetAvailableDesks(request.Date);
+            if (availableDesks.Any())
             {
-                _deskBookingRepository.Save(Create<DeskBooking>(request));
+                Desk availableDesk = availableDesks.First();
+                DeskBooking newDeskBooking = Create<DeskBooking>(request);
+                newDeskBooking.DeskId = availableDesk.Id;
+                _deskBookingRepository.Save(newDeskBooking);
             }
 
             return Create<DeskBookingResult>(request);
