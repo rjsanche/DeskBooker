@@ -24,9 +24,8 @@ namespace DeskBooker.Core.Processor
                 throw new ArgumentNullException(nameof(request));
             }
             IEnumerable<Desk> availableDesks = _deskRepository.GetAvailableDesks(request.Date);
-            if (availableDesks.Any())
+            if (availableDesks.FirstOrDefault() is Desk availableDesk)
             {
-                Desk availableDesk = availableDesks.First();
                 DeskBooking newDeskBooking = Create<DeskBooking>(request);
                 newDeskBooking.DeskId = availableDesk.Id;
                 _deskBookingRepository.Save(newDeskBooking);
