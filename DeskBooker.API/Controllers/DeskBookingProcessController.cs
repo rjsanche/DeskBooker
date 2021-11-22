@@ -1,10 +1,7 @@
-﻿using DeskBooker.Core.Domain;
-using DeskBooker.Core.Processor;
+﻿using DeskBooker.Core.DeskBooker.Application;
+using DeskBooker.Core.DeskBooker.Domain;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,7 +17,7 @@ namespace DeskBooker.API.Controllers
         {
             _deskBookingRequestProcessor = deskBookingRequestProcessor;
         }
-        
+
         // GET: api/<ValuesController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -39,7 +36,10 @@ namespace DeskBooker.API.Controllers
         [HttpPost]
         public void Post([FromBody] DeskBookingRequest request)
         {
-            _deskBookingRequestProcessor.BookDesk(request);
+            if (ModelState.IsValid)
+            {
+                _deskBookingRequestProcessor.BookDesk(request);
+            }
         }
 
         // PUT api/<ValuesController>/5

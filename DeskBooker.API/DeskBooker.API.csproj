@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeskBooker.Core\DeskBooker.Core.csproj" />
+    <ProjectReference Include="..\DeskBooker.Infrastructure.DataAccess\DeskBooker.Infrastructure.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
